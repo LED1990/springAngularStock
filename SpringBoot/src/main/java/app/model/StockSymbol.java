@@ -20,10 +20,11 @@ public class StockSymbol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stock_symbols_id_seq")
     @SequenceGenerator(name = "stock_symbols_id_seq", sequenceName = "stock_symbols_id_seq", allocationSize = 1)
-    Long id;
+    private Long id;
     @Column(nullable = false)
     @Length(max = 10)
-    String symbol;
+    private String symbol;
     @Length(max = 500)
-    String name;
+    private String name;
+    private Float price;//USD
 }
