@@ -1,11 +1,13 @@
 package app.services;
 
 import app.dao.StockSymbolsDao;
+import app.model.StockData;
 import app.model.StockSymbol;
-import app.model.StockWeekData;
 import app.model.wrappers.LastWeekDataWrapper;
 import app.model.wrappers.SymbolsWrapper;
 import app.services.interfaces.FinancialModelingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +20,18 @@ import java.util.Optional;
 
 @Service
 public class FinancialModelingServiceImpl implements FinancialModelingService {
-
-    private static final String ALL_SYMBOLS_URL = "/company/stock/list";
-    private static final String LAST_WEEK_DATA_URL = "/historical-price-full/%s?from=%s&to=%s";
-    private RestTemplate restTemplate;
-    private StockSymbolsDao stockSymbolsDao;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Value("${financialModUrl}")
     private String url;
+
+    private static final String ALL_SYMBOLS_URL = "/company/stock/list";
+
+    private static final String LAST_WEEK_DATA_URL = "/historical-price-full/%s?from=%s&to=%s";
+
+    private RestTemplate restTemplate;
+
+    private StockSymbolsDao stockSymbolsDao;
 
     @Autowired
     public FinancialModelingServiceImpl(RestTemplate restTemplate, StockSymbolsDao stockSymbolsDao) {
@@ -52,14 +58,15 @@ public class FinancialModelingServiceImpl implements FinancialModelingService {
         }
     }
 
-    public Optional<List<StockWeekData>> getLastWeekData(String symbol){
+    @Override
+    public Optional<List<StockData>> getLastWeekData(String symbol) {
         LocalDate from = LocalDate.now().minusDays(7);
         LocalDate now = LocalDate.now();
         ResponseEntity<LastWeekDataWrapper> responseEntity = restTemplate.getForEntity(String.format(url + LAST_WEEK_DATA_URL, symbol, from.toString(), now.toString()), LastWeekDataWrapper.class);
-        if (responseEntity.getStatusCodeValue() == 200 && responseEntity.getBody() != null){
-            if (responseEntity.getBody().getHistorical() != null){
+        if (responseEntity.getStatusCodeValue() == 200 && responseEntity.getBody() != null) {
+            if (responseEntity.getBody().getHistorical() != null) {
                 responseEntity.getBody().getHistorical().forEach(stockWeekData -> {
-                    if (stockWeekData != null){
+                    if (stockWeekData != null) {
                         stockWeekData.setSymbol(symbol);
                         stockWeekData.setActual(true);
                     }

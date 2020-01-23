@@ -3,7 +3,6 @@ package app.components;
 import app.dao.StockSymbolsDao;
 import app.dao.StockWeekDataDao;
 import app.model.SearchCriteria;
-import app.model.StockWeekData;
 import app.services.interfaces.FinancialModelingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class StockData {
+public class StockDataComponent {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,7 +25,7 @@ public class StockData {
     private FinancialModelingService financialModelingService;
 
     @Autowired
-    public StockData(StockSymbolsDao stockSymbolsDao, StockWeekDataDao stockWeekDataDao, FinancialModelingService financialModelingService) {
+    public StockDataComponent(StockSymbolsDao stockSymbolsDao, StockWeekDataDao stockWeekDataDao, FinancialModelingService financialModelingService) {
         this.stockSymbolsDao = stockSymbolsDao;
         this.stockWeekDataDao = stockWeekDataDao;
         this.financialModelingService = financialModelingService;
@@ -69,11 +68,13 @@ public class StockData {
         }
     }
 
-    private void saveWeekData(List<StockWeekData> data, String symbol){
+    private void saveWeekData(List<app.model.StockData> data, String symbol){
         logger.debug("Saving data to DB for symbol: " + symbol);
         stockWeekDataDao.deleteUsingSymbol(symbol);
         stockWeekDataDao.saveAll(data);
     }
+
+
 
 
 

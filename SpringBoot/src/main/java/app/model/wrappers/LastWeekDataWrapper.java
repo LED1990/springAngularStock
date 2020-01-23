@@ -1,6 +1,6 @@
 package app.model.wrappers;
 
-import app.model.StockWeekData;
+import app.model.StockData;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +10,5 @@ import java.util.List;
 @Setter
 public class LastWeekDataWrapper {
     private String symbol;
-    private List<StockWeekData> historical;
+    private List<StockData> historical;
 }

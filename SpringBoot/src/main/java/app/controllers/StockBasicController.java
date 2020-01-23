@@ -1,6 +1,6 @@
 package app.controllers;
 
-import app.components.StockData;
+import app.components.StockDataComponent;
 import app.model.SearchCriteria;
 import app.model.StockSymbol;
 import app.services.interfaces.FinancialModelingService;
@@ -16,12 +16,12 @@ import java.util.Optional;
 public class StockBasicController {
 
     private FinancialModelingService financialModelingService;
-    private StockData stockData;
+    private StockDataComponent stockDataComponent;
 
     @Autowired
-    public StockBasicController(FinancialModelingService financialModelingService, StockData stockData) {
+    public StockBasicController(FinancialModelingService financialModelingService, StockDataComponent stockDataComponent) {
         this.financialModelingService = financialModelingService;
-        this.stockData = stockData;
+        this.stockDataComponent = stockDataComponent;
     }
 
     @GetMapping("/api/v1/stock/symbols")
@@ -39,7 +39,7 @@ public class StockBasicController {
     @GetMapping("/api/v1/stock/symbols/byprice")//do wywalenia
     public String getStockSymbolsByPrice(@Param("min") Float min, @Param("max") Float max){
         SearchCriteria searchCriteria = new SearchCriteria(min, max);
-        stockData.findSymbolsByPriceRange(searchCriteria).ifPresent(strings -> stockData.getAllPriceDataFromLastWeek(strings));
+        stockDataComponent.findSymbolsByPriceRange(searchCriteria).ifPresent(strings -> stockDataComponent.getAllPriceDataFromLastWeek(strings));
         return "Success";
     }
 
