@@ -1,1 +1,48 @@
-<p>menu works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button class="mat-button" (click)="drawer.toggle()" #sideMenuButton>
+      <span>
+        <mat-icon role="img" aria-hidden="true">
+          <svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+          </svg>
+        </mat-icon>
+      </span>
+    </button>
+    <img src="../../../assets/logo.png" title="logo" width="150" height="40" alt="logo" style="margin-left: 10px;">
+    <ul>
+      <li>
+        <a class="bar-links" (click)="sideMenuButton.hidden = false">
+          <span>CHARTS</span>
+        </a>
+      </li>
+      <li>
+        <a class="bar-links" (click)="drawer.close(); sideMenuButton.hidden = true">
+          <span>SEARCH</span>
+        </a>
+      </li>
+      <li>
+        <a class="bar-links" (click)="drawer.close(); sideMenuButton.hidden = true">
+          <span>SQL</span>
+        </a>
+      </li>
+    </ul>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" #drawer>
+    <div class="side-nav-container">
+      <mat-panel-description class="introduction-link">
+        <mat-nav-list>
+          <a> Introduction </a>
+        </mat-nav-list>
+      </mat-panel-description>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div style="width: 100%">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+

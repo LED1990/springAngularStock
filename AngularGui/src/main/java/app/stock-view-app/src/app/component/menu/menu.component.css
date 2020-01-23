@@ -1,0 +1,125 @@
+mat-toolbar-row {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  background-color: #1976d2;
+}
+
+.mat-button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: white;
+  height: 100%;
+  min-width: 64px;
+}
+
+.mat-button:hover {
+  background-color: #336699;
+}
+
+ul li {
+  list-style: none;
+  color: white;
+  height: 64px;
+  width: 100%;
+  display: inline;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+li a {
+  cursor: pointer;
+  font-family: sans-serif;
+}
+
+li a:hover {
+  color: #aaaaaa;
+}
+
+mat-drawer-content {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+mat-drawer-container {
+  height: 100%;
+  width: 100%;
+}
+
+.side-nav-container {
+  width: 100%;
+  height: 100%;
+}
+
+mat-icon {
+  display: block;
+  margin: auto;
+}
+
+.introduction-link {
+  height: 48px;
+  align-items: center;
+  margin: 0;
+}
+
+mat-drawer {
+  width: 15%;
+}
+
+mat-panel-description.introduction-link:hover {
+  background-color: #dbdbdb;
+  color: #039be5;
+}
+
+mat-expansion-panel-header.expansion-header:hover {
+  background-color: #dbdbdb !important;
+  color: #039be5;
+}
+
+mat-expansion-panel-header.expansion-header:hover mat-panel-description {
+  background-color: #dbdbdb !important;
+  color: #039be5;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  margin: 0;
+  padding: 0 !important;
+}
+
+mat-nav-list a {
+  padding-left: 20px;
+}
+
+mat-nav-list a:hover {
+  background-color: #dbdbdb;
+  color: #039be5;
+}
+
+.mat-list-base .mat-list-item{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: lightslategray;
+}
+.mat-list-base .mat-list-item:hover{
+  color: #039be5;
+}
+
+.bar-links{
+  color: white;
+  text-decoration: none;
+}
+
+.bar-links:hover{
+  color: #aaaaaa;
+}
+

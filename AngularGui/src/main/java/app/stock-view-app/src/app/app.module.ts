@@ -5,8 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {jqxChartModule} from "jqwidgets-ng/jqxchart";
-import {WeekChartComponent} from './components/week-chart/week-chart.component';
+
 import {MenuComponent} from './component/menu/menu.component';
+import {WeekChartComponent} from "./component/week-chart/week-chart.component";
+import {MaterialModule} from "./material/material.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import {MenuComponent} from './component/menu/menu.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    jqxChartModule
+    jqxChartModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
