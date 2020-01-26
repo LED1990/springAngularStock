@@ -12,12 +12,12 @@
     <img src="../../../assets/logo.png" title="logo" width="150" height="40" alt="logo" style="margin-left: 10px;">
     <ul>
       <li>
-        <a class="bar-links" (click)="sideMenuButton.hidden = false">
+        <a class="bar-links" (click)="sideMenuButton.hidden = false" routerLink="/charts">
           <span>CHARTS</span>
         </a>
       </li>
       <li>
-        <a class="bar-links" (click)="drawer.close(); sideMenuButton.hidden = true">
+        <a class="bar-links" (click)="drawer.close(); sideMenuButton.hidden = true" routerLink="/search">
           <span>SEARCH</span>
         </a>
       </li>

@@ -25,7 +25,7 @@ export class WeekChartComponent implements OnInit {
         {name: 'high'},
         {name: 'low'}
       ],
-      url: 'http://localhost:9091/api/v1/stock/intraday?interval=15&symbol=AAXJ' //todo change to dynamic URL
+      // url: 'http://localhost:9091/api/v1/stock/intraday?interval=15&symbol=AAXJ' //todo change to dynamic URL
     };
 
   dataAdapter = new jqx.dataAdapter(this.source, {

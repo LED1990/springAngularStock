@@ -1,9 +1,8 @@
 package app.services;
 
-import app.dao.StockSymbolsDao;
 import app.model.StockData;
 import app.model.StockSymbol;
-import app.model.wrappers.LastWeekDataWrapper;
+import app.model.wrappers.StockDataWrapper;
 import app.model.wrappers.SymbolsWrapper;
 import app.services.interfaces.FinancialModelingService;
 import org.slf4j.Logger;
@@ -27,16 +26,13 @@ public class FinancialModelingServiceImpl implements FinancialModelingService {
 
     private static final String ALL_SYMBOLS_URL = "/company/stock/list";
 
-    private static final String LAST_WEEK_DATA_URL = "/historical-price-full/%s?from=%s&to=%s";
+    private static final String FULL_DATA_URL = "/historical-price-full/%s?from=%s&to=%s";
 
     private RestTemplate restTemplate;
 
-    private StockSymbolsDao stockSymbolsDao;
-
     @Autowired
-    public FinancialModelingServiceImpl(RestTemplate restTemplate, StockSymbolsDao stockSymbolsDao) {
+    public FinancialModelingServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.stockSymbolsDao = stockSymbolsDao;
     }
 
     @Override
@@ -48,27 +44,23 @@ public class FinancialModelingServiceImpl implements FinancialModelingService {
         return Optional.empty();
     }
 
+    /**
+     * In my case yesterday data
+     *
+     * @param symbol symbols to get data
+     * @return void
+     */
     @Override
-    public void updateStockSymbols() {
-        Optional<List<StockSymbol>> optionalStockSymbols = getAllSymbols();
-        //if relations to any other tables will appear I will have to change update approach !
-        if (optionalStockSymbols.isPresent()) {
-            stockSymbolsDao.deleteAllInBatch();
-            stockSymbolsDao.saveAll(optionalStockSymbols.get());
-        }
-    }
-
-    @Override
-    public Optional<List<StockData>> getLastWeekData(String symbol) {
-        LocalDate from = LocalDate.now().minusDays(7);
-        LocalDate now = LocalDate.now();
-        ResponseEntity<LastWeekDataWrapper> responseEntity = restTemplate.getForEntity(String.format(url + LAST_WEEK_DATA_URL, symbol, from.toString(), now.toString()), LastWeekDataWrapper.class);
+    public Optional<List<StockData>> getStockData(String symbol) {
+        LocalDate from = LocalDate.now().minusDays(1);
+        LocalDate to = LocalDate.now().minusDays(1);
+        ResponseEntity<StockDataWrapper> responseEntity = restTemplate.getForEntity(String.format(url + FULL_DATA_URL, symbol, from, to), StockDataWrapper.class);
         if (responseEntity.getStatusCodeValue() == 200 && responseEntity.getBody() != null) {
             if (responseEntity.getBody().getHistorical() != null) {
-                responseEntity.getBody().getHistorical().forEach(stockWeekData -> {
-                    if (stockWeekData != null) {
-                        stockWeekData.setSymbol(symbol);
-                        stockWeekData.setActual(true);
+                responseEntity.getBody().getHistorical().forEach(stockData -> {
+                    if (stockData != null) {
+                        stockData.setSymbol(symbol);
+                        stockData.setActual(true);
                     }
                 });
                 return Optional.ofNullable(responseEntity.getBody().getHistorical());

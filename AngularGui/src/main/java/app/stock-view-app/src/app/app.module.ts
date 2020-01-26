@@ -9,19 +9,29 @@ import {jqxChartModule} from "jqwidgets-ng/jqxchart";
 import {MenuComponent} from './component/menu/menu.component';
 import {WeekChartComponent} from "./component/week-chart/week-chart.component";
 import {MaterialModule} from "./material/material.module";
+import {ChartsComponent} from './component/charts/charts.component';
+import {AppRoutesModule} from "./component/routes/app-routes.module";
+import {CriteriaSearchComponent} from './component/criteria-search/criteria-search.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
     WeekChartComponent,
-    MenuComponent
+    MenuComponent,
+    ChartsComponent,
+    CriteriaSearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     jqxChartModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutesModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

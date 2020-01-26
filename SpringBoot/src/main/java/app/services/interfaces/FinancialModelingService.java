@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface FinancialModelingService {
     Optional<List<StockSymbol>> getAllSymbols();
-    Optional<List<StockData>> getLastWeekData(String symbol);
-    void updateStockSymbols();
+
+    Optional<List<StockData>> getStockData(String symbol);
 }

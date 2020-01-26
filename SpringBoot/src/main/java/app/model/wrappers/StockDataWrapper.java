@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class LastWeekDataWrapper {
+public class StockDataWrapper {
     private String symbol;
     private List<StockData> historical;
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "stock_week_data")
+@Table(name = "stock_data")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,8 +19,8 @@ import java.util.Date;
 public class StockData implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stock_week_data_id_seq")
-    @SequenceGenerator(name = "stock_week_data_id_seq", sequenceName = "stock_week_data_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stock_data_id_seq")
+    @SequenceGenerator(name = "stock_data_id_seq", sequenceName = "stock_data_id_seq", allocationSize = 1)
     private Long id;
     @Column
     private String symbol;

@@ -1,0 +1,66 @@
+<div class="search-main-container">
+
+  <div class="search-criteria-container">
+    <form class="example-form" [formGroup]="searchForm" (ngSubmit)="search()">
+      <mat-form-field class="form-field">
+        <label>
+          <input type="number" matInput placeholder="Min. stock price" formControlName="minPrice" required>
+        </label>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <label>
+          <input type="number" matInput placeholder="Max. stock price" formControlName="maxPrice" required>
+        </label>
+      </mat-form-field>
+
+      <button mat-button class="submit-button" type="submit" [disabled]="!searchForm.valid">Search</button>
+    </form>
+  </div>
+  <div class="search-criteria-results">
+    <div class="mat-elevation-z8 stock-data-table-container">
+      <h3>Stock data table</h3>
+      <table mat-table [dataSource]="stockDataSource" class="stock-data-table" matSort>
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>SYMBOL</th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+        <ng-container matColumnDef="open">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OPEN</th>
+          <td mat-cell *matCellDef="let element"> {{element.open}} </td>
+        </ng-container>
+        <ng-container matColumnDef="close">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>CLOSE</th>
+          <td mat-cell *matCellDef="let element"> {{element.close}} </td>
+        </ng-container>
+        <ng-container matColumnDef="high">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>HIGH</th>
+          <td mat-cell *matCellDef="let element"> {{element.high}} </td>
+        </ng-container>
+        <ng-container matColumnDef="low">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>LOW</th>
+          <td mat-cell *matCellDef="let element"> {{element.low}} </td>
+        </ng-container>
+        <ng-container matColumnDef="change">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>CHANGE</th>
+          <td mat-cell *matCellDef="let element"> {{element.change}} </td>
+        </ng-container>
+        <ng-container matColumnDef="changePercent">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>CHANGE %</th>
+          <td mat-cell *matCellDef="let element"> {{element.changePercent}} </td>
+        </ng-container>
+        <ng-container>
+          <th mat-header-cell *matHeaderCellDef >ACTIONS</th>
+          <td mat-cell *matCellDef="let element">
+
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="stockDataColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: stockDataColumns;"></tr>
+      </table>
+      <mat-paginator #stockDataPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+</div>
+

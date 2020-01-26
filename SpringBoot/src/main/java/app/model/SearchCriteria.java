@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SearchCriteria {
 
-    private float minPrice;
-    private float maxPrice;
+    private Float minPrice;
+    private Float maxPrice;
 }
