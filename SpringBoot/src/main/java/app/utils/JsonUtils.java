@@ -1,6 +1,7 @@
 package app.utils;
 
 import app.model.StockData;
+import app.utils.enums.TimeSeries;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,14 +16,33 @@ public class JsonUtils {
 
     private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
-    public static List<StockData> convertJsonStringToStockDataList(String response, int interval, String symbol) {
+    public static List<StockData> convertJsonStringToStockDataList(String response, Integer interval, String symbol, TimeSeries timeSeries) {
+        if (response == null) {
+            throw new IllegalArgumentException("Invalid input");
+        }
         JSONObject root = new JSONObject(response);
-        JSONObject seriesData = (JSONObject) root.get(String.format("Time Series (%dmin)", interval));
+        JSONObject seriesData;
+        SimpleDateFormat dateFormat;
+        switch (timeSeries) {
+            case INTRADAY:
+                seriesData = (JSONObject) root.get(String.format("Time Series (%dmin)", interval));
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                break;
+            case DAILY:
+                seriesData = (JSONObject) root.get("Time Series (Daily)");
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                break;
+            case WEEKLY:
+                seriesData = (JSONObject) root.get("Weekly Time Series");
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid time series");
+        }
         String key;
         JSONObject value;
         Iterator<String> iterator = seriesData.keys();
         List<StockData> result = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         while (iterator.hasNext()) {
             key = iterator.next();
             value = (JSONObject) seriesData.get(key);

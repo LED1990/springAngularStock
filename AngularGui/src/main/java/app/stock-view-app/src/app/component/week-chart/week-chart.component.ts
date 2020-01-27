@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {formatDate} from "@angular/common";
 
 @Component({
@@ -8,33 +8,43 @@ import {formatDate} from "@angular/common";
 })
 export class WeekChartComponent implements OnInit {
 
+  @Input() symbol: string;
+  source: any;
+  dataAdapter: any;
+
   constructor() {
   }
 
   ngOnInit() {
+    this.prepareChart();
   }
 
-  source: any =
-    {
-      datatype: 'json',
-      datafields: [
-        {name: 'symbol'},
-        {name: 'date'},
-        {name: 'open'},
-        {name: 'close'},
-        {name: 'high'},
-        {name: 'low'}
-      ],
-      // url: 'http://localhost:9091/api/v1/stock/intraday?interval=15&symbol=AAXJ' //todo change to dynamic URL
-    };
+  private prepareChart() {
+    this.source =
+      {
+        datatype: 'json',
+        datafields: [
+          {name: 'symbol'},
+          {name: 'date'},
+          {name: 'open'},
+          {name: 'close'},
+          {name: 'high'},
+          {name: 'low'}
+        ],
+        url: 'http://localhost:9091/api/v1/stock/data/intraday?interval=15&symbol='.concat(this.symbol) //todo change to dynamic URL
+      };
 
-  dataAdapter = new jqx.dataAdapter(this.source, {
-    async: false,
-    autoBind: true,
-    loadError: (xhr: any, status: any, error: any) => {
-      alert('Error loading "' + this.source.url + '" : ' + error);
-    }
-  });
+    this.dataAdapter = new jqx.dataAdapter(this.source, {
+      async: false,
+      autoBind: true,
+      loadError: (xhr: any, status: any, error: any) => {
+        alert('Error loading "' + this.source.url + '" : ' + error);
+      }
+    });
+
+  }
+
+
   toolTipCustomFormatFn = (value: any, itemIndex: any, serie: any, group: any, categoryValue: any, categoryAxis: any) => {
     return '<DIV style="text-align:left"><b>Date: ' +
       formatDate(categoryValue, 'yyyy/MM/dd', 'en-US') +

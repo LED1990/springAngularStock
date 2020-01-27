@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-charts',
@@ -7,9 +8,21 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ChartsComponent implements OnInit {
 
-  constructor() { }
+  private symbol: string;
+
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.checkEvent(this.router);
+  }
 
   ngOnInit() {
+  }
+
+  private checkEvent(r: Router) {
+    r.events.subscribe(value => {
+      if (value instanceof NavigationEnd) {
+        this.symbol = this.route.snapshot.paramMap.get('symbol');
+      }
+    })
   }
 
 }

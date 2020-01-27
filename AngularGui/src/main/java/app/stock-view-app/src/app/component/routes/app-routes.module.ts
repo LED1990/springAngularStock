@@ -7,8 +7,6 @@ const routes: Routes = [
   {path: '', redirectTo: '/search', pathMatch: 'full'},
   {path: 'search', component: CriteriaSearchComponent},
   {path: 'charts/:symbol', component: ChartsComponent},
-  {path: 'charts', component: ChartsComponent},
-
 ];
 
 @NgModule({

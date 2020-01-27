@@ -12,7 +12,7 @@ import {StockData} from "../../model/StockData";
 })
 export class CriteriaSearchComponent implements OnInit {
 
-  stockDataColumns: string[] = ['symbol', 'open', 'close', 'high', 'low', 'change', 'changePercent'];
+  stockDataColumns: string[] = ['symbol', 'open', 'close', 'high', 'low', 'change', 'changePercent', 'actions'];
   stockDataSource = new MatTableDataSource<StockData>([]);
   @ViewChild('stockDataPaginator', {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -42,9 +42,7 @@ export class CriteriaSearchComponent implements OnInit {
   }
 
   search(): void {
-    console.log('hello');
     this.stockSearchService.getStockDataUsingSearchCriteria(this.getSerachFormValue()).subscribe(value => {
-      console.log(value);
       this.stockDataSource.data = value;
     });
   }

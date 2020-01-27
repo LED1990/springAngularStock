@@ -18,7 +18,6 @@ export class StockSearchService {
   constructor(private httpClient: HttpClient) { }
 
   getStockDataUsingSearchCriteria(criteria: SearchCriteria): Observable<StockData[]>{
-    console.log(criteria);
     const mapping = '/data/search/criteria';
     return this.httpClient.post<StockData[]>(this.url.concat(mapping), criteria, this.httpOptions);
   }
