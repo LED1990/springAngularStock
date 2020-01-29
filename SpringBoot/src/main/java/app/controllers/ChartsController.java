@@ -1,7 +1,7 @@
 package app.controllers;
 
 import app.model.StockData;
-import app.services.interfaces.ChartsDataServie;
+import app.services.interfaces.ChartsDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,37 +19,37 @@ import java.util.Optional;
 public class ChartsController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private ChartsDataServie chartsDataServie;
+    private ChartsDataService chartsDataService;
 
     @Autowired
-    public ChartsController(ChartsDataServie chartsDataServie) {
-        this.chartsDataServie = chartsDataServie;
+    public ChartsController(ChartsDataService chartsDataService) {
+        this.chartsDataService = chartsDataService;
     }
 
     @GetMapping("/api/v1/stock/data/charts/week")
     public List<StockData> getWeekData(@RequestParam(name = "symbol") String symbol) {
-        Optional<List<StockData>> result = chartsDataServie.getWeekData(symbol);
+        Optional<List<StockData>> result = chartsDataService.getWeekData(symbol);
         result.ifPresent(stockData -> Comparator.comparing(StockData::getDate));
         return result.orElse(null);
     }
 
     @GetMapping("/api/v1/stock/data/charts/month")
     public List<StockData> getMonthData(@RequestParam(name = "symbol") String symbol) {
-        Optional<List<StockData>> result = chartsDataServie.getMonthData(symbol);
+        Optional<List<StockData>> result = chartsDataService.getMonthData(symbol);
         result.ifPresent(stockData -> Comparator.comparing(StockData::getDate));
         return result.orElse(null);
     }
 
     @GetMapping("/api/v1/stock/data/charts/halfyear")
     public List<StockData> getSixMonthData(@RequestParam(name = "symbol") String symbol) {
-        Optional<List<StockData>> result = chartsDataServie.getSixMonthsData(symbol);
+        Optional<List<StockData>> result = chartsDataService.getSixMonthsData(symbol);
         result.ifPresent(stockData -> Comparator.comparing(StockData::getDate));
         return result.orElse(null);
     }
 
     @GetMapping("/api/v1/stock/data/charts/year")
     public List<StockData> getLastYearData(@RequestParam(name = "symbol") String symbol) {
-        Optional<List<StockData>> result = chartsDataServie.getLastYearData(symbol);
+        Optional<List<StockData>> result = chartsDataService.getLastYearData(symbol);
         result.ifPresent(stockData -> Comparator.comparing(StockData::getDate));
         return result.orElse(null);
     }

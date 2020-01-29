@@ -1,4 +1,4 @@
-package app.dao.interfaces;
+package app.dao.interfaces.jpa;
 
 import app.model.SearchCriteria;
 import app.model.StockData;

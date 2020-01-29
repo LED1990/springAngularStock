@@ -1,4 +1,4 @@
-package app.dao.interfaces;
+package app.dao.interfaces.jpa;
 
 import app.model.StockData;
 import org.springframework.data.jpa.repository.JpaRepository;

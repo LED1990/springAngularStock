@@ -40,6 +40,15 @@ spring:
     url: jdbc:postgresql://localhost:5432/stockDev
     username: stockDev
     password: stockDev
+  data:
+    mongodb:
+#      authentication-database: admin
+      username: stock_user
+      password: stock_pass
+      database: stock_db
+      host: localhost
+      port: 27017
+#      uri: mongodb://root:root@localhost:27017/stock_db #when set host and port are ignored
 logging:
   level:
     app: debug

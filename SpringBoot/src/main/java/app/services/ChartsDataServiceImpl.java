@@ -2,7 +2,7 @@ package app.services;
 
 import app.model.StockData;
 import app.services.interfaces.AlphaVentageService;
-import app.services.interfaces.ChartsDataServie;
+import app.services.interfaces.ChartsDataService;
 import app.util.DateToLocalDateConverter;
 import app.utils.enums.TimeSeries;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ChartsDataServiceImpl implements ChartsDataServie {
+public class ChartsDataServiceImpl implements ChartsDataService {
 
     private AlphaVentageService alphaVentageService;
 

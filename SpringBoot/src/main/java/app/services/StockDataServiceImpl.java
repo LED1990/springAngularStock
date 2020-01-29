@@ -1,7 +1,7 @@
 package app.services;
 
-import app.dao.interfaces.StockDataDao;
-import app.dao.interfaces.StockSymbolsDao;
+import app.dao.interfaces.jpa.StockDataDao;
+import app.dao.interfaces.jpa.StockSymbolsDao;
 import app.model.SearchCriteria;
 import app.services.interfaces.FinancialModelingService;
 import app.services.interfaces.StockDataService;

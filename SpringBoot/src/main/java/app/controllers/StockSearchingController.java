@@ -1,7 +1,7 @@
 package app.controllers;
 
 
-import app.dao.interfaces.StockDataSearchDao;
+import app.dao.interfaces.jpa.StockDataSearchDao;
 import app.model.SearchCriteria;
 import app.model.StockData;
 import org.slf4j.Logger;

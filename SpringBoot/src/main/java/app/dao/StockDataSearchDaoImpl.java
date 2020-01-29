@@ -1,6 +1,6 @@
 package app.dao;
 
-import app.dao.interfaces.StockDataSearchDao;
+import app.dao.interfaces.jpa.StockDataSearchDao;
 import app.model.SearchCriteria;
 import app.model.StockData;
 import org.springframework.stereotype.Repository;
