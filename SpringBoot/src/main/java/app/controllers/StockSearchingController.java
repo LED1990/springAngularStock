@@ -20,7 +20,7 @@ import java.util.Optional;
 public class StockSearchingController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private StockDataSearchDao stockDataDao;
+    private final StockDataSearchDao stockDataDao;
 
     @Autowired
     public StockSearchingController(StockDataSearchDao stockDataDao) {

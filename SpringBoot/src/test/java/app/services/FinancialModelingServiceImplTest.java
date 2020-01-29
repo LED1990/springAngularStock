@@ -97,7 +97,7 @@ class FinancialModelingServiceImplTest {
     }
 
     private ResponseEntity<StockDataWrapper> prepareInvalidResponseStockData() {
-        ResponseEntity<StockDataWrapper> responseEntity = null;
+        ResponseEntity<StockDataWrapper> responseEntity;
         responseEntity = new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         return responseEntity;
     }

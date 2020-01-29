@@ -19,7 +19,7 @@ import java.util.Optional;
 public class ChartsController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private ChartsDataService chartsDataService;
+    private final ChartsDataService chartsDataService;
 
     @Autowired
     public ChartsController(ChartsDataService chartsDataService) {

@@ -16,8 +16,8 @@ import java.util.List;
 @Service
 public class MongoStockDataServiceImpl implements MongoStockDataService {
 
-    private MongoDailyStockDataDao mongoDailyStockDataDao;
-    private MongoWeeklyStockDataDao mongoWeeklyStockDataDao;
+    private final MongoDailyStockDataDao mongoDailyStockDataDao;
+    private final MongoWeeklyStockDataDao mongoWeeklyStockDataDao;
 
     @Autowired
     public MongoStockDataServiceImpl(MongoDailyStockDataDao mongoDailyStockDataDao, MongoWeeklyStockDataDao mongoWeeklyStockDataDao) {

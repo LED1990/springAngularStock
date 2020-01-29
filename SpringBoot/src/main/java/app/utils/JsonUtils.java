@@ -14,7 +14,7 @@ import java.util.List;
 
 public class JsonUtils {
 
-    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
     public static List<StockData> convertJsonStringToStockDataList(String response, Integer interval, String symbol, TimeSeries timeSeries) {
         if (response == null) {

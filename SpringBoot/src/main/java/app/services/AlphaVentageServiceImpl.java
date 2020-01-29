@@ -27,7 +27,7 @@ public class AlphaVentageServiceImpl implements AlphaVentageService {
     private static final String INTRA_DAY_FULL_URL = "/query?function=TIME_SERIES_INTRADAY&symbol=%s&interval=%s&outputsize=full&apikey=%s";
     private static final String DAILY_FULL_URL = "/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s";
     private static final String WEEKLY_URL = "/query?function=TIME_SERIES_WEEKLY&symbol=%s&apikey=%s";
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public AlphaVentageServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;

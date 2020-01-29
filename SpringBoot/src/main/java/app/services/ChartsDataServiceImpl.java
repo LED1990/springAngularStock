@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class ChartsDataServiceImpl implements ChartsDataService {
 
-    private AlphaVentageService alphaVentageService;
+    private final AlphaVentageService alphaVentageService;
 
     public ChartsDataServiceImpl(AlphaVentageService alphaVentageService) {
         this.alphaVentageService = alphaVentageService;

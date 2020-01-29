@@ -21,12 +21,12 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class StockDataServiceImpl implements StockDataService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    private StockDataDao stockDataDao;
-    private StockSymbolsDao stockSymbolsDao;
-    private FinancialModelingService financialModelingService;
+    private final StockDataDao stockDataDao;
+    private final StockSymbolsDao stockSymbolsDao;
+    private final FinancialModelingService financialModelingService;
 
     @Autowired
     public StockDataServiceImpl(StockDataDao stockDataDao, StockSymbolsDao stockSymbolsDao, FinancialModelingService financialModelingService) {
@@ -38,9 +38,7 @@ public class StockDataServiceImpl implements StockDataService {
     @Override
     public void updateStockSymbols() {
         stockSymbolsDao.deleteAllInBatch();
-        financialModelingService.getAllSymbols().ifPresent(stockSymbols -> {
-            stockSymbolsDao.saveAll(stockSymbols);
-        });
+        financialModelingService.getAllSymbols().ifPresent(stockSymbolsDao::saveAll);
     }
 
     @Override

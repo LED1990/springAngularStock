@@ -28,7 +28,7 @@ public class FinancialModelingServiceImpl implements FinancialModelingService {
 
     private static final String FULL_DATA_URL = "/historical-price-full/%s?from=%s&to=%s";
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     @Autowired
     public FinancialModelingServiceImpl(RestTemplate restTemplate) {
