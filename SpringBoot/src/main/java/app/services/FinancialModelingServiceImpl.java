@@ -5,6 +5,7 @@ import app.model.StockSymbol;
 import app.model.wrappers.StockDataWrapper;
 import app.model.wrappers.SymbolsWrapper;
 import app.services.interfaces.FinancialModelingService;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Setter
 public class FinancialModelingServiceImpl implements FinancialModelingService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -52,9 +54,8 @@ public class FinancialModelingServiceImpl implements FinancialModelingService {
      */
     @Override
     public Optional<List<StockData>> getStockData(String symbol) {
-        LocalDate from = LocalDate.now().minusDays(1);
-        LocalDate to = LocalDate.now().minusDays(1);
-        ResponseEntity<StockDataWrapper> responseEntity = restTemplate.getForEntity(String.format(url + FULL_DATA_URL, symbol, from, to), StockDataWrapper.class);
+        LocalDate date = LocalDate.now().minusDays(1);
+        ResponseEntity<StockDataWrapper> responseEntity = restTemplate.getForEntity(String.format(url + FULL_DATA_URL, symbol, date, date), StockDataWrapper.class);
         if (responseEntity.getStatusCodeValue() == 200 && responseEntity.getBody() != null) {
             if (responseEntity.getBody().getHistorical() != null) {
                 responseEntity.getBody().getHistorical().forEach(stockData -> {

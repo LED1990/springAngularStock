@@ -5,6 +5,7 @@ import app.utils.enums.TimeSeries;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,11 +13,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@Service
 public class JsonUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
-    public static List<StockData> convertJsonStringToStockDataList(String response, Integer interval, String symbol, TimeSeries timeSeries) {
+    public List<StockData> convertJsonStringToStockDataList(String response, Integer interval, String symbol, TimeSeries timeSeries) {
         if (response == null) {
             throw new IllegalArgumentException("Invalid input");
         }

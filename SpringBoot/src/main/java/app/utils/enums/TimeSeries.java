@@ -3,5 +3,7 @@ package app.utils.enums;
 public enum TimeSeries {
     INTRADAY,
     DAILY,
-    WEEKLY
+    WEEKLY,
+    MONTH,
+    YEAR,
 }
