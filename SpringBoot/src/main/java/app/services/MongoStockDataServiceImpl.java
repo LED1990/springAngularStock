@@ -10,8 +10,10 @@ import app.utils.enums.TimeSeries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MongoStockDataServiceImpl implements MongoStockDataService {
@@ -40,5 +42,21 @@ public class MongoStockDataServiceImpl implements MongoStockDataService {
                 return false;
         }
         return true;
+    }
+
+    @Override
+    public Optional<List<StockData>> getStockData(TimeSeries timeSeries, String symbol) {
+        List<StockData> result = new ArrayList<>();
+        switch (timeSeries) {
+            case DAILY:
+            case WEEKLY:
+                mongoIntraDayStockDataDao.findById(symbol).ifPresent(intraDayStockData -> result.addAll(intraDayStockData.getSotckData()));
+                break;
+            case MONTH:
+            case YEAR:
+                mongoDailyStockDataDao.findById(symbol).ifPresent(dailyStockData -> result.addAll(dailyStockData.getSotckData()));
+                break;
+        }
+        return result.isEmpty() ? Optional.empty() : Optional.of(result);
     }
 }

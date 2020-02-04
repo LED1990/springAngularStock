@@ -3,7 +3,7 @@ package app.services;
 import app.model.StockData;
 import app.services.interfaces.AlphaVentageService;
 import app.services.interfaces.ChartsDataService;
-import app.services.interfaces.MongoDataService;
+import app.services.interfaces.MongoStockDataService;
 import app.util.DateToLocalDateConverter;
 import app.utils.enums.TimeSeries;
 import org.springframework.stereotype.Service;
@@ -17,16 +17,16 @@ import java.util.stream.Collectors;
 public class ChartsDataServiceImpl implements ChartsDataService {
 
     private final AlphaVentageService alphaVentageService;
-    private final MongoDataService mongoDataService;
+    private final MongoStockDataService mongoStockDataService;
 
-    public ChartsDataServiceImpl(AlphaVentageService alphaVentageService, MongoDataService mongoDataService) {
+    public ChartsDataServiceImpl(AlphaVentageService alphaVentageService, MongoStockDataService mongoStockDataService) {
         this.alphaVentageService = alphaVentageService;
-        this.mongoDataService = mongoDataService;
+        this.mongoStockDataService = mongoStockDataService;
     }
 
     @Override
     public Optional<List<StockData>> getWeekData(String symbol) {
-        Optional<List<StockData>> result = mongoDataService.getStockData(TimeSeries.WEEKLY, symbol);
+        Optional<List<StockData>> result = mongoStockDataService.getStockData(TimeSeries.WEEKLY, symbol);
         if (result.isEmpty()) {
             result = alphaVentageService.getIntradayData(60, symbol, false);
         }
@@ -39,7 +39,7 @@ public class ChartsDataServiceImpl implements ChartsDataService {
 
     @Override
     public Optional<List<StockData>> getMonthData(String symbol) {
-        Optional<List<StockData>> result = mongoDataService.getStockData(TimeSeries.DAILY, symbol);
+        Optional<List<StockData>> result = mongoStockDataService.getStockData(TimeSeries.DAILY, symbol);
         if (result.isEmpty()) {
             result = alphaVentageService.getIntradayData(60, symbol, true);
         }
@@ -52,7 +52,7 @@ public class ChartsDataServiceImpl implements ChartsDataService {
 
     @Override
     public Optional<List<StockData>> getSixMonthsData(String symbol) {
-        Optional<List<StockData>> result = mongoDataService.getStockData(TimeSeries.MONTH, symbol);
+        Optional<List<StockData>> result = mongoStockDataService.getStockData(TimeSeries.MONTH, symbol);
         if (result.isEmpty()) {
             result = alphaVentageService.getStockData(symbol, TimeSeries.DAILY);
         }
@@ -65,7 +65,7 @@ public class ChartsDataServiceImpl implements ChartsDataService {
 
     @Override
     public Optional<List<StockData>> getLastYearData(String symbol) {
-        Optional<List<StockData>> result = mongoDataService.getStockData(TimeSeries.YEAR, symbol);
+        Optional<List<StockData>> result = mongoStockDataService.getStockData(TimeSeries.YEAR, symbol);
         if (result.isEmpty()) {
             result = alphaVentageService.getStockData(symbol, TimeSeries.YEAR);
         }
