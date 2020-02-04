@@ -1,5 +1,11 @@
 <div class="charts-main-container">
-  <div class="week-chart">
-    <app-week-chart [symbol]="symbol"></app-week-chart>
+  <div class="charts-pair">
+    <div class="chart-container">
+      <app-week-chart [symbol]="symbol"></app-week-chart>
+    </div>
+    <div class="chart-container">
+      <app-month-chart [symbol]="symbol"></app-month-chart>
+    </div>
   </div>
+
 </div>

@@ -1,9 +1,13 @@
-.charts-main-container{
+.charts-main-container {
   width: 100%;
   height: 100%;
 }
 
-.week-chart{
+.chart-container {
   width: 45%;
   height: 45%;
+}
+
+.charts-pair{
+  display: flex;
 }

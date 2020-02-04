@@ -14,6 +14,7 @@ import {AppRoutesModule} from "./component/routes/app-routes.module";
 import {CriteriaSearchComponent} from './component/criteria-search/criteria-search.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {MonthChartComponent} from './component/month-chart/month-chart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {HttpClientModule} from "@angular/common/http";
     WeekChartComponent,
     MenuComponent,
     ChartsComponent,
-    CriteriaSearchComponent
+    CriteriaSearchComponent,
+    MonthChartComponent
   ],
   imports: [
     BrowserModule,

@@ -3,18 +3,17 @@ import {formatDate} from "@angular/common";
 import {environment} from "../../../environments/environment";
 
 @Component({
-  selector: 'app-week-chart',
-  templateUrl: './week-chart.component.html',
-  styleUrls: ['./week-chart.component.css']
+  selector: 'app-month-chart',
+  templateUrl: './month-chart.component.html',
+  styleUrls: ['./month-chart.component.css']
 })
-export class WeekChartComponent implements OnInit {
+export class MonthChartComponent implements OnInit {
 
   @Input() symbol: string;
   source: any;
   dataAdapter: any;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
     this.prepareChart();
@@ -32,7 +31,7 @@ export class WeekChartComponent implements OnInit {
           {name: 'high'},
           {name: 'low'}
         ],
-        url: environment.springServerUrl + '/v1/stock/data/charts/week?symbol='.concat(this.symbol)
+        url: environment.springServerUrl + '/v1/stock/data/charts/month?symbol='.concat(this.symbol)
       };
 
     this.dataAdapter = new jqx.dataAdapter(this.source, {
@@ -129,4 +128,5 @@ export class WeekChartComponent implements OnInit {
       //   ]
       // }
     ];
+
 }
