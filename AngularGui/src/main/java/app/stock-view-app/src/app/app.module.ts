@@ -7,14 +7,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {jqxChartModule} from "jqwidgets-ng/jqxchart";
 
 import {MenuComponent} from './component/menu/menu.component';
-import {WeekChartComponent} from "./component/week-chart/week-chart.component";
+import {WeekChartComponent} from "./component/charts_view/week-chart/week-chart.component";
 import {MaterialModule} from "./material/material.module";
-import {ChartsComponent} from './component/charts/charts.component';
+import {ChartsComponent} from './component/charts_view/charts/charts.component';
 import {AppRoutesModule} from "./component/routes/app-routes.module";
 import {CriteriaSearchComponent} from './component/criteria-search/criteria-search.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {MonthChartComponent} from './component/month-chart/month-chart.component';
+import {MonthChartComponent} from './component/charts_view/month-chart/month-chart.component';
+import {HalfYearChartComponent} from './component/charts_view/half-year-chart/half-year-chart.component';
+import {YearChartComponent} from './component/charts_view/year-chart/year-chart.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {MonthChartComponent} from './component/month-chart/month-chart.component
     MenuComponent,
     ChartsComponent,
     CriteriaSearchComponent,
-    MonthChartComponent
+    MonthChartComponent,
+    HalfYearChartComponent,
+    YearChartComponent
   ],
   imports: [
     BrowserModule,

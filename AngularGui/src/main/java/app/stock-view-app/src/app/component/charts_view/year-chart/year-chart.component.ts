@@ -1,20 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {environment} from "../../../../environments/environment";
 import {formatDate} from "@angular/common";
-import {environment} from "../../../environments/environment";
 
 @Component({
-  selector: 'app-week-chart',
-  templateUrl: './week-chart.component.html',
-  styleUrls: ['./week-chart.component.css']
+  selector: 'app-year-chart',
+  templateUrl: './year-chart.component.html',
+  styleUrls: ['./year-chart.component.css']
 })
-export class WeekChartComponent implements OnInit {
+export class YearChartComponent implements OnInit {
 
   @Input() symbol: string;
   source: any;
   dataAdapter: any;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
     this.prepareChart();
@@ -32,7 +31,7 @@ export class WeekChartComponent implements OnInit {
           {name: 'high'},
           {name: 'low'}
         ],
-        url: environment.springServerUrl + '/v1/stock/data/charts/week?symbol='.concat(this.symbol)
+        url: environment.springServerUrl + '/v1/stock/data/charts/year?symbol='.concat(this.symbol)
       };
 
     this.dataAdapter = new jqx.dataAdapter(this.source, {
@@ -44,7 +43,6 @@ export class WeekChartComponent implements OnInit {
     });
 
   }
-
 
   toolTipCustomFormatFn = (value: any, itemIndex: any, serie: any, group: any, categoryValue: any, categoryAxis: any) => {
     return '<DIV style="text-align:left"><b>Date: ' +
@@ -68,16 +66,16 @@ export class WeekChartComponent implements OnInit {
         }
       },
       type: 'basic',
-      baseUnit: 'hour',
+      baseUnit: 'day',
       valuesOnTicks: true,
       interval: 1,
       rangeSelector: {
         padding: {left: 25, right: 10, top: 10, bottom: 10},
         backgroundColor: 'white',
         dataField: 'close',
-        baseUnit: 'hour',
+        baseUnit: 'day',
         serieType: 'area',
-        gridLines: {visible: false},
+        gridLines: {visible: true},
         labels:
           {
             formatFunction: (value: any) => {
@@ -129,4 +127,5 @@ export class WeekChartComponent implements OnInit {
       //   ]
       // }
     ];
+
 }

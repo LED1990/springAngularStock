@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {formatDate} from "@angular/common";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-month-chart',

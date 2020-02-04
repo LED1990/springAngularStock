@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {ChartsComponent} from "../charts/charts.component";
+import {ChartsComponent} from "../charts_view/charts/charts.component";
 import {CriteriaSearchComponent} from "../criteria-search/criteria-search.component";
 
 const routes: Routes = [
