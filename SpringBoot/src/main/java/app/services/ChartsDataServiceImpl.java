@@ -28,9 +28,10 @@ public class ChartsDataServiceImpl implements ChartsDataService {
     public Optional<List<StockData>> getWeekData(String symbol) {
         Optional<List<StockData>> result = mongoStockDataService.getStockData(TimeSeries.WEEKLY, symbol);
         if (result.isEmpty()) {
-            result = alphaVentageService.getIntradayData(60, symbol, false);
+            result = alphaVentageService.getIntradayData(60, symbol, true);
         }
         if (result.isPresent()) {
+            mongoStockDataService.saveStockDataToCollection(TimeSeries.WEEKLY, symbol, result.get());
             LocalDate from = LocalDate.now().minusDays(7);
             return Optional.of(result.get().stream().filter(stockData -> DateToLocalDateConverter.convertDateToLocalDate(stockData.getDate()).isAfter(from)).collect(Collectors.toList()));
         }
@@ -57,6 +58,7 @@ public class ChartsDataServiceImpl implements ChartsDataService {
             result = alphaVentageService.getStockData(symbol, TimeSeries.DAILY);
         }
         if (result.isPresent()) {
+            mongoStockDataService.saveStockDataToCollection(TimeSeries.DAILY, symbol, result.get());
             LocalDate from = LocalDate.now().minusMonths(6);
             return Optional.of(result.get().stream().filter(stockData -> DateToLocalDateConverter.convertDateToLocalDate(stockData.getDate()).isAfter(from)).collect(Collectors.toList()));
         }
