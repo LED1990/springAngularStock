@@ -90,7 +90,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.8</version>
+            <version>42.4.1</version>
         </dependency>
         <!-- REMOVE this before production! usefull for dev, no need to restart server after every change in code-->
         <dependency>
